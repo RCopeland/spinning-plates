@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 /**
  * Base
  */
+
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
@@ -32,18 +33,8 @@ const gradientTexture = textureLoader.load('/textures/gradients/3.jpg');
  * Objects
  */
 
-// const material = new THREE.MeshBasicMaterial();
-// material.map = doorColorTexture;
-// material.color.set('green');
-// material.alphaMap = doorAlphaTexture;
-// material.wireframe = true;
-// material.transparent = true;
-// material.opacity = 0.5;
-// material.side = THREE.DoubleSide;
-
 const material = new THREE.MeshNormalMaterial();
 material.side = THREE.DoubleSide;
-// material.wireframe = true;
 
 const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), material);
 sphere.position.x = -1.5;
@@ -89,8 +80,6 @@ torus.position.z = 1000;
 scene.add(plane, plane2, plane3);
 scene.add(plane4, plane5, plane6);
 scene.add(plane7, plane8, plane9);
-// scene.add(sphere, torus);
-
 
 /**
  * Sizes
@@ -122,8 +111,6 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-// camera.position.x = 1
-// camera.position.y = 1
 camera.position.z = 4;
 scene.add(camera)
 
@@ -148,7 +135,6 @@ const planes = [plane, plane2,plane3, plane4, plane5, plane6, plane7, plane8, pl
 const group = new THREE.Group();
 group.add(plane2, plane3, plane4, plane5, plane6, plane7, plane8, plane9);
 scene.add(group);
-const getRandomPlane = () => planes[Math.floor(Math.random()*planes.length)];
 
 const tick = () =>
 {
@@ -163,22 +149,13 @@ const tick = () =>
        plane.position.z = elapsedTime * Math.sin(0);
     });
 
-    // plane4.position.x =
-    // plane4.position.x = Math.sin(elapsedTime / 0.001);
-    // plane4.position.y = Math.sin(elapsedTime / 0.001);
-    // plane4.position.y -= elapsedTime * -0.01;
-
     group.rotation.z = elapsedTime * 0.5;
 
-    // plane2.rotation.y += elapsedTime * 0.125;
-    // plane3.rotation.y += elapsedTime * 0.15;
-    torus.rotation.y = elapsedTime * 0.1;
+    camera.position.z -= 0.003;
 
-    sphere.rotation.x = elapsedTime * 0.15;
-    // plane.rotation.x = elapsedTime * 0.15;
-    torus.rotation.x = elapsedTime * 0.15;
-
-
+    if(Math.abs(camera.position.z) > 4) {
+        camera.position.z = 4
+    }
 
     // Update controls
     controls.update()

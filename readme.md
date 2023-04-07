@@ -1,8 +1,6 @@
-# Three.js Journey
+# Spinning Plates
 
-## Setup
-Download [Node.js](https://nodejs.org/en/download/).
-Run this followed commands:
+A weird spinning effect that might make you sick? I'm learning 3JS.
 
 ``` bash
 # Install dependencies (only the first time)
